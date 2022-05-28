@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Rubén Chávez Barragán">
+  <link rel="icon" href="favicon.ico">
+  <title>Práctica 11</title>
+  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,300&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="top">
+    <h1>Editor de Texto</h1>
+    <h2>Version 0.1</h2>
+  </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><i class="fa-solid fa-skull"></i> pain</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Archivo
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" id="archivo" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="#" onclick="myFunction()">Accion</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Opciones
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="form-group p-4">
+    <label for="exampleFormControlTextarea1">Ingrese su texto!</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
+  </div>
+  <table class="table" id="tableTokens">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Token</th>
+      <th scope="col">Descripcion</th>
+    </tr>
+  </thead>
+  <tbody id="tbodyTokens">
+  </tbody>
+</table>
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/8edf423a64.js" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    var arrayOG = [
+      { 'token': 'inicio' , 'descripcion' : 'Palabra reservada para iniciar el programa'},
+      { 'token': 'almacen' , 'descripcion' : 'Palabra reservada para crear el paquete de la clase'},
+      { 'token': '.' , 'descripcion' : 'Separador'},
+      { 'token': 'practica11' , 'descripcion' : 'Nombre del paquete'},
+      { 'token': 'libreria' , 'descripcion' : 'Palabra reservada para importar las librerias'},
+      { 'token': 'teclado' , 'descripcion' : 'Nombre de la libreria'},
+      { 'token': 'entrada' , 'descripcion' : 'Nombre del objeto'},
+      { 'token': ';' , 'descripcion' : 'Signo que indica el fin de la instrucción'},
+      { 'token': 'crea' , 'descripcion' : 'Palabra reservada para crear variables'},
+      { 'token': 'mostrar' , 'descripcion' : 'Palabra reservada para imprimir en pantalla'},
+      { 'token': 'entero' , 'descripcion' : 'Palabra reservada para indicar que la variable es de tipo entero'},
+      { 'token': '=' , 'descripcion' : 'Signo que indica la asignacion de un valor'},
+      { 'token': '(' , 'descripcion' : 'Caracter especial'},
+      { 'token': ')' , 'descripcion' : 'Caracter especial'},
+      { 'token': '"' , 'descripcion' : 'Caracter especial'},
+      { 'token': '+' , 'descripcion' : 'Signo aritmetico, indica suma'},
+      { 'token': '-' , 'descripcion' : 'Signo aritmetico, indica resta'},
+      { 'token': '*' , 'descripcion' : 'Signo aritmetico, indica multiplicacion'},
+      { 'token': '/' , 'descripcion' : 'Signo aritmetico, indica division'},
+      { 'token': 'fin' , 'descripcion' : 'Palabra reservada para indicar fin del programa'}
+    ];
+
+    var array = [
+      { 'token': 'inicio' , 'descripcion' : 'Palabra reservada para iniciar el programa'},
+      { 'token': 'almacen' , 'descripcion' : 'Palabra reservada para crear el paquete de la clase'},
+      { 'token': '.' , 'descripcion' : 'Separador'},
+      { 'token': 'practica11' , 'descripcion' : 'Nombre del paquete'},
+      { 'token': 'libreria' , 'descripcion' : 'Palabra reservada para importar las librerias'},
+      { 'token': 'teclado' , 'descripcion' : 'Nombre de la libreria'},
+      { 'token': 'entrada' , 'descripcion' : 'Nombre del objeto'},
+      { 'token': ';' , 'descripcion' : 'Signo que indica el fin de la instrucción'},
+      { 'token': 'crea' , 'descripcion' : 'Palabra reservada para crear variables'},
+      { 'token': 'mostrar' , 'descripcion' : 'Palabra reservada para imprimir en pantalla'},
+      { 'token': 'entero' , 'descripcion' : 'Palabra reservada para indicar que la variable es de tipo entero'},
+      { 'token': '=' , 'descripcion' : 'Signo que indica la asignacion de un valor'},
+      { 'token': '(' , 'descripcion' : 'Caracter especial'},
+      { 'token': ')' , 'descripcion' : 'Caracter especial'},
+      { 'token': '"' , 'descripcion' : 'Caracter especial'},
+      { 'token': '+' , 'descripcion' : 'Signo aritmetico, indica suma'},
+      { 'token': '-' , 'descripcion' : 'Signo aritmetico, indica resta'},
+      { 'token': '*' , 'descripcion' : 'Signo aritmetico, indica multiplicacion'},
+      { 'token': '/' , 'descripcion' : 'Signo aritmetico, indica division'},
+      { 'token': 'fin' , 'descripcion' : 'Palabra reservada para indicar fin del programa'}
+    ];
+
+    function myFunction(){
+
+      array = arrayOG;
+
+      var splitedText = splitText(document.getElementById("exampleFormControlTextarea1").value);
+      var tableRefAll = document.getElementById("tableTokens");
+      tableRefAll.removeChild(tableRefAll.getElementsByTagName("tbody")[0]);
+      var tbody = document.createElement('tbody');
+      tbody.id = "tbodyTokens";
+      tableRefAll.appendChild(tbody);
+
+      var tableRef = document.getElementById("tbodyTokens");
+
+      var text_arr = splitedText.split(/(\s+)/).filter( function(e) { return e.trim().length > 0; } );
+      console.log(text_arr);
+
+      var counter = 0;
+
+      for (var word of text_arr) {
+
+       // Inserta una fila en la tabla, en el índice
+       var newRow = tableRef.insertRow(counter);
+       // Inserta una celda en la fila, en el índice 0
+       var newCell0  = newRow.insertCell(0);
+       // Inserta una celda en la fila, en el índice 1
+       var newCell1  = newRow.insertCell(1);
+       // Inserta una celda en la fila, en el índice 2
+       var newCell2  = newRow.insertCell(2);
+
+       // Añade un nodo de texto a la celda0
+       var newText0  = document.createTextNode(counter);
+       // Añade un nodo de texto a la celda1
+       newCell0.appendChild(newText0);
+
+       var newText1 = document.createTextNode(word);
+       newCell1.appendChild(newText1);
+        
+       // Get descrip of word
+       const descrip = getDes(word);
+
+       if (descrip == "Palabra reservada para crear variables") {
+        var nextIndex = counter;
+        nextIndex++; 
+        const nextObj = text_arr[nextIndex];
+        array.push({'token': nextObj , 'descripcion' : 'Variable de nombre: '+ nextObj});
+       }
+
+       // Añade un nodo de texto a la celda2
+       var newText2  = document.createTextNode(descrip);
+       newCell2.appendChild(newText2);
+       counter++;
+      }
+    }
+
+    function getDes(wordParam) {
+      var valueToken;
+      var paramTemp = wordParam;
+      for (var objectToken of array) {
+        if (paramTemp.toString().toLocaleLowerCase() === objectToken.token) {
+          valueToken = objectToken.descripcion;
+        }
+      }
+      if (valueToken === undefined || valueToken === null) {
+        valueToken = "Caracter no definido";
+      }
+      return valueToken;
+    }
+
+    function splitText(textAll) {
+      let textSplit = textAll;
+      textSplit = textSplit.replace(/\./g,' . ');
+      textSplit = textSplit.replace(/\=/g,' = ');
+      textSplit = textSplit.replace(/\(/g,' ( ');
+      textSplit = textSplit.replace(/\)/g,' ) ');
+      textSplit = textSplit.replace(/\"/g,' " ');
+      textSplit = textSplit.replace(/\;/g,' ; ');
+      textSplit = textSplit.replace(/\+/g,' + ');
+      textSplit = textSplit.replace(/\-/g,' - ');
+      textSplit = textSplit.replace(/\*/g,' * ');
+      textSplit = textSplit.replace(/\//g,' / ');
+      return textSplit;
+    }
+  </script>
+
+</body>
+</html>
