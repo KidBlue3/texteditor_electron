@@ -16,7 +16,7 @@
     body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
     body { background: #fff; }
     /* optional Container STYLES */
-    .chart { margin: 5px; margin: 5px auto; border: 3px solid #DDD; border-radius: 3px; }
+    .chart { margin: 5px; margin: 5px auto; border: 3px solid #DDD; border-radius: 3px; width: 4000px;}
     .node { color: #9CB5ED; border: 2px solid #C8C8C8; border-radius: 3px; }
     .node p { font-size: 20px; line-height: 20px; height: 20px; font-weight: bold; padding: 0px; margin: 0; }
     /* required LIB STYLES */
@@ -50,7 +50,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" id="archivo" aria-labelledby="navbarDarkDropdownMenuLink">
               <li><a class="dropdown-item" href="#" onclick="myFunction()">Accion</a></li>
-              <li><a class="dropdown-item" href="#">Diagrama</a></li>
+              <li><a class="dropdown-item" href="#" onclick="printDiagram()">Diagrama</a></li>
             </ul>
           </li>
         </ul>
@@ -97,54 +97,52 @@
 
   <script type="text/javascript">
 
-    
     var simple_chart_config = {
       chart: {
         container: "#OrganiseChart-simple"
       },
-      
       nodeStructure: {
-        text: { name: "Parent node" },
-        children: [
-          {
-            text: { name: "First child" }
-          },
-          {
-            text: { name: "Second child" }
-          }
-        ]
-      }
-    };
-    new Treant( simple_chart_config );
+          children: []
+        }
+      };
+
+
+    var simple_chart_config_OG = {
+      chart: {
+        container: "#OrganiseChart-simple"
+      },
+      nodeStructure: {
+          children: []
+        }
+      };
+
 
     var arrayOG = [
-      { 'token': 'inicio' , 'descripcion' : 'Palabra reservada para iniciar el programa'},
-      { 'token': 'almacen' , 'descripcion' : 'Palabra reservada para crear el paquete de la clase'},
-      { 'token': '.' , 'descripcion' : 'Separador'},
-      { 'token': 'practica11' , 'descripcion' : 'Nombre del paquete'},
-      { 'token': 'libreria' , 'descripcion' : 'Palabra reservada para importar las librerias'},
-      { 'token': 'teclado' , 'descripcion' : 'Nombre de la libreria'},
-      { 'token': 'entrada' , 'descripcion' : 'Nombre del objeto'},
-      { 'token': ';' , 'descripcion' : 'Signo que indica el fin de la instrucción'},
-      { 'token': 'crea' , 'descripcion' : 'Palabra reservada para crear variables'},
-      { 'token': 'mostrar' , 'descripcion' : 'Palabra reservada para imprimir en pantalla'},
-      { 'token': 'entero' , 'descripcion' : 'Palabra reservada para indicar que la variable es de tipo entero'},
-      { 'token': '=' , 'descripcion' : 'Signo que indica la asignacion de un valor'},
-      { 'token': '(' , 'descripcion' : 'Caracter especial'},
-      { 'token': ')' , 'descripcion' : 'Caracter especial'},
-      { 'token': '"' , 'descripcion' : 'Caracter especial'},
-      { 'token': '+' , 'descripcion' : 'Signo aritmetico, indica suma'},
-      { 'token': '-' , 'descripcion' : 'Signo aritmetico, indica resta'},
-      { 'token': '*' , 'descripcion' : 'Signo aritmetico, indica multiplicacion'},
-      { 'token': '/' , 'descripcion' : 'Signo aritmetico, indica division'},
-      { 'token': 'fin' , 'descripcion' : 'Palabra reservada para indicar fin del programa'}
+      { 'token': 'inicio' , 'descripcion' : 'Palabra reservada para iniciar el programa', order: 0},
+      { 'token': 'almacen' , 'descripcion' : 'Palabra reservada para crear el paquete de la clase', order: 1},
+      { 'token': '.' , 'descripcion' : 'Separador',  order: 1},
+      { 'token': 'libreria' , 'descripcion' : 'Palabra reservada para importar las librerias', order:1},
+      { 'token': 'teclado' , 'descripcion' : 'Nombre de la libreria', order: 2},
+      { 'token': 'entrada' , 'descripcion' : 'Nombre del objeto', order: 3},
+      { 'token': ';' , 'descripcion' : 'Signo que indica el fin de la instrucción', order: 1},
+      { 'token': 'crea' , 'descripcion' : 'Palabra reservada para crear variables' , order: 1},
+      { 'token': 'mostrar' , 'descripcion' : 'Palabra reservada para imprimir en pantalla', order: 1},
+      { 'token': 'entero' , 'descripcion' : 'Palabra reservada para indicar que la variable es de tipo entero', order: 3},
+      { 'token': '=' , 'descripcion' : 'Signo que indica la asignacion de un valor', order: 2},
+      { 'token': '(' , 'descripcion' : 'Caracter especial', order: 1},
+      { 'token': ')' , 'descripcion' : 'Caracter especial', order: 1},
+      { 'token': '"' , 'descripcion' : 'Caracter especial', order: 1},
+      { 'token': '+' , 'descripcion' : 'Signo aritmetico, indica suma', order: 2},
+      { 'token': '-' , 'descripcion' : 'Signo aritmetico, indica resta', order: 2},
+      { 'token': '*' , 'descripcion' : 'Signo aritmetico, indica multiplicacion', order: 2},
+      { 'token': '/' , 'descripcion' : 'Signo aritmetico, indica division', order: 2 },
+      { 'token': 'fin' , 'descripcion' : 'Palabra reservada para indicar fin del programa', order: 1}
     ];
 
     var array = [
       { 'token': 'inicio' , 'descripcion' : 'Palabra reservada para iniciar el programa'},
       { 'token': 'almacen' , 'descripcion' : 'Palabra reservada para crear el paquete de la clase'},
       { 'token': '.' , 'descripcion' : 'Separador'},
-      { 'token': 'practica11' , 'descripcion' : 'Nombre del paquete'},
       { 'token': 'libreria' , 'descripcion' : 'Palabra reservada para importar las librerias'},
       { 'token': 'teclado' , 'descripcion' : 'Nombre de la libreria'},
       { 'token': 'entrada' , 'descripcion' : 'Nombre del objeto'},
@@ -162,6 +160,8 @@
       { 'token': '/' , 'descripcion' : 'Signo aritmetico, indica division'},
       { 'token': 'fin' , 'descripcion' : 'Palabra reservada para indicar fin del programa'}
     ];
+
+    var text_arr;
 
     function myFunction(){
 
@@ -176,7 +176,7 @@
 
       var tableRef = document.getElementById("tbodyTokens");
 
-      var text_arr = splitedText.split(/(\s+)/).filter( function(e) { return e.trim().length > 0; } );
+      text_arr = splitedText.split(/(\s+)/).filter( function(e) { return e.trim().length > 0; } );
       console.log(text_arr);
 
       var counter = 0;
@@ -207,7 +207,7 @@
         var nextIndex = counter;
         nextIndex++; 
         const nextObj = text_arr[nextIndex];
-        array.push({'token': nextObj , 'descripcion' : 'Variable de nombre: '+ nextObj});
+          array.push({'token': nextObj , 'descripcion' : 'Variable de nombre: '+ nextObj});
        }
 
        // Añade un nodo de texto a la celda2
@@ -244,6 +244,99 @@
       textSplit = textSplit.replace(/\*/g,' * ');
       textSplit = textSplit.replace(/\//g,' / ');
       return textSplit;
+    }
+    
+    function printDiagram() {
+
+      var lineArrayData = document.getElementById("exampleFormControlTextarea1").value.split(/\r?\n/);
+
+      console.log(lineArrayData);
+      var item = 0;
+      for (const element of lineArrayData) {
+        if (element !== "") {
+            if(element.toLowerCase() == "inicio"){
+              simple_chart_config.nodeStructure.text =  { name: element.toLowerCase() };
+              continue;
+            }
+
+            if(element.toLowerCase() == "fin"){
+              addChild(simple_chart_config.nodeStructure.children, element.toLowerCase(), 1);
+              continue;
+            }
+
+            if (element.includes("mostrar") || element.includes("result")) {
+              var level = 0;
+              element.split(/(?!\(.*)\s(?![^(]*?\))/g).forEach(word => {
+                  if (level === 0) {
+                    addChild(simple_chart_config.nodeStructure.children, word.toLowerCase());
+                  }if (level === 1) {
+                    if (!simple_chart_config.nodeStructure.children[item].hasOwnProperty('children')) {
+                      simple_chart_config.nodeStructure.children[item].children = []
+                    }
+                    addChild(simple_chart_config.nodeStructure.children[item].children, word.toLowerCase());
+                  }
+                  if (level === 2) {
+                    if (!simple_chart_config.nodeStructure.children[item].children[0].hasOwnProperty('children')) {
+                      simple_chart_config.nodeStructure.children[item].children[0].children = []
+                    }
+                    addChild(simple_chart_config.nodeStructure.children[item].children[0].children, word.toLowerCase());
+                  }
+                level++;
+                });
+            }else{
+              if ((element.indexOf('.') < element.indexOf(' ') && element.indexOf('.') !== -1) || element.indexOf(' ') === -1 ) {
+              var level = 0;
+              element.split(".").forEach(word => {
+                  if (level === 0) {
+                    addChild(simple_chart_config.nodeStructure.children, word.toLowerCase());
+                  }if (level === 1) {
+                    if (!simple_chart_config.nodeStructure.children[item].hasOwnProperty('children')) {
+                      simple_chart_config.nodeStructure.children[item].children = []
+                    }
+                    addChild(simple_chart_config.nodeStructure.children[item].children, word.toLowerCase());
+                  }
+                  if (level === 2) {
+                    if (!simple_chart_config.nodeStructure.children[item].children[0].hasOwnProperty('children')) {
+                      simple_chart_config.nodeStructure.children[item].children[0].children = []
+                    }
+                    addChild(simple_chart_config.nodeStructure.children[item].children[0].children, word.toLowerCase());
+                  }
+                level++;
+                });
+              }
+              else{
+                var level = 0;
+                element.split(" ").forEach(word => {
+                  if (level === 0) {
+                    addChild(simple_chart_config.nodeStructure.children, word.toLowerCase());
+                  }
+                  if (level === 1) {
+                    if (!simple_chart_config.nodeStructure.children[item].hasOwnProperty('children')) {
+                      simple_chart_config.nodeStructure.children[item].children = []
+                    }
+                    addChild(simple_chart_config.nodeStructure.children[item].children, word.toLowerCase());
+                  }
+                  if (level === 2) {
+                    if (!simple_chart_config.nodeStructure.children[item].children[0].hasOwnProperty('children')) {
+                      simple_chart_config.nodeStructure.children[item].children[0].children = []
+                    }
+                    addChild(simple_chart_config.nodeStructure.children[item].children[0].children, word.toLowerCase());
+                  }
+                  level++;
+                });
+              }
+            }
+            item++;
+          }
+        }
+      var diagramMain = new Treant(simple_chart_config);
+      console.log(simple_chart_config);
+    }
+
+    function addChild(treeData, nameText) {
+      treeData.push({
+				  text: { name: nameText }
+			  });
     }
   </script>
 
