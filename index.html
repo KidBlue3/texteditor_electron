@@ -54,18 +54,6 @@
             </ul>
           </li>
         </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Opciones
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
       </div>
     </div>
   </nav>
@@ -199,13 +187,13 @@
 
        var newText1 = document.createTextNode(word);
        newCell1.appendChild(newText1);
-        
+
        // Get descrip of word
        const descrip = getDes(word);
 
        if (descrip == "Palabra reservada para crear variables") {
         var nextIndex = counter;
-        nextIndex++; 
+        nextIndex++;
         const nextObj = text_arr[nextIndex];
           array.push({'token': nextObj , 'descripcion' : 'Variable de nombre: '+ nextObj});
        }
@@ -245,7 +233,7 @@
       textSplit = textSplit.replace(/\//g,' / ');
       return textSplit;
     }
-    
+
     function printDiagram() {
 
       var lineArrayData = document.getElementById("exampleFormControlTextarea1").value.split(/\r?\n/);
