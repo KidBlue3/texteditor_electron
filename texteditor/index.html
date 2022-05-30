@@ -151,13 +151,13 @@
 
        var newText1 = document.createTextNode(word);
        newCell1.appendChild(newText1);
-        
+
        // Get descrip of word
        const descrip = getDes(word);
 
        if (descrip == "Palabra reservada para crear variables") {
         var nextIndex = counter;
-        nextIndex++; 
+        nextIndex++;
         const nextObj = text_arr[nextIndex];
         array.push({'token': nextObj , 'descripcion' : 'Variable de nombre: '+ nextObj});
        }
